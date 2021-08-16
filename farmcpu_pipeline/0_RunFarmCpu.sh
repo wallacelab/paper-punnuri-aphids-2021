@@ -58,13 +58,13 @@ while read trait; do
     # Set up Covariates.
     case $trait in
         "GHD") covariates="$cov_spad" ;;  # SPAD for greenhouse damage
-        "NDVIAug25") covariates="$cov_flower $cov_height" ;;  # Flowering + plant height for the drone data
-        "NDREAug25") covariates="$cov_flower $cov_height" ;;
-        "SAVI_Aug25") covariates="$cov_flower $cov_height" ;;
+        # "NDVIAug25") covariates="NONE" ;;  # To run drone data without flowering as a covariate, uncomment these lines
+        # "NDREAug25") covariates="NONE" ;;
+        # "SAVI_Aug25") covariates="NONE" ;;
         "nSpad") covariates="NONE" ;;  # None for the covariates (SPAD, flowering, height) so can see where they hit on their own
         "FLoweringtime") covariates="NONE" ;;  
         "Log_2019.2020_PH") covariates="NONE" ;;  
-        *) covariates="$cov_flower" ;;  # Just flowering for everything else (=aphid counts and plant height)
+        *) covariates="$cov_flower" ;;  # Just flowering for everything else (=aphid counts, drone damage (NDVI, NDRE, SAVI), and plant height)
     esac
     echo "Running trait $trait with covariates $covariates"
     
