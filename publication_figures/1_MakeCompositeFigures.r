@@ -5,7 +5,7 @@ library(ggpubr)
 library(grid)
 library(png)
 options(stringsAsFactors=F)
-setwd('/home/jgwall/Documents/Papers/PUNNURI_Sorghum Aphid Resistance/Figures/GWAS_combined_v1.4_composites/')
+setwd('~/Documents/Papers/PUNNURI_Sorghum Aphid Resistance/GWAS_github/publication_figures/')
 
 # Arguments to pass along (easier to keep in a list like this)
 args=list()
@@ -14,11 +14,10 @@ args$perm_cutoff=0.01
 args$winsize=5e6
 args$step=5e5
 args$offsets="sorghum_offsets.csv"
-args$debug=FALSE
+args$debug=FALSE  # Set to true to speed plotting during debugging of changes
 
 # Output figure size (in inches)
 out.width=8
-#out.height=3 # Depends on the specific plot
 out.dpi=600
 legend.file="wallace-legend.png"
 
@@ -83,5 +82,3 @@ png("Figure - Flowering and Height Manhattan plots.png", width=out.width, height
     get_plots(c("Flowering Time", "Plant Height (log)"))
 dev.off()
 
-
-# TODO: Get legend on there somehow

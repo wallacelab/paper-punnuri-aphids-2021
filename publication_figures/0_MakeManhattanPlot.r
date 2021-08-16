@@ -89,12 +89,13 @@ plot_manhattan = function(trait_name, glm_file, farm_file, args){
         labs(x=element_blank(), y=element_blank()) + # X and Y axis labels
         ggtitle(trait_name) +
         theme(title = element_text(size=10, face='bold')) # Set title 
+        
     
     # Add significant GLM hits
     myplot = myplot +
         geom_point(data=glm.sig, size=2, color='black', fill=alpha('white', 0), shape=21, stroke=1.5)
     
-    # Add right Y axis to plot
+    # Adjust Y axis - add right axis and set significant digits for everything
     if(nrow(farm.all)>0){
         farm.max = max(farm.all$rmip)
     }else{
@@ -102,8 +103,9 @@ plot_manhattan = function(trait_name, glm_file, farm_file, args){
     }
     scale_trans = farm.max / max(glm$log.p)    
     myplot = myplot +
-        #scale_y_continuous(sec.axis = sec_axis(trans = ~. * scale_trans, name="RMIP (FARM-CPU)"))
-        scale_y_continuous(sec.axis = sec_axis(trans = ~. * scale_trans, name=element_blank()))
+        scale_y_continuous(labels = scales::number_format(accuracy=0.1),
+                           sec.axis = sec_axis(trans = ~. * scale_trans, name=element_blank(),
+                                               labels = scales::number_format(accuracy=0.01)))
     
     # Cumulative Farm-CPU distribution
     if(nrow(farm.all) > 0){
