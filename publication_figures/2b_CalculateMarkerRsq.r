@@ -11,7 +11,7 @@ options(stringsAsFactors=F)
 setwd('~/Documents/Papers/PUNNURI_Sorghum Aphid Resistance/GWAS_github/publication_figures/')
 
 # Parameters
-glm_max_p=0.05 # Significant permutation p-value for GLM hits (max value)
+glm_max_p=0.01 # Significant permutation p-value for GLM hits (max value)
 farm_min_rmip=0.05 # Significant RMIP value for FarmCPU resampling analysis (min value)
 num_pcs=3 # Number of principal coordinates to include in the model
 source("0_PhenotypeKey.r") # Key connecting human-fiendly phenotype names to ones used in pipeline

@@ -1,10 +1,10 @@
 "Trait","glm_r2","rmip_r2","combined_r2"
-"Flowering Time",0.242,0.604,0.648
+"Flowering Time",0.133,0.604,0.648
 "Greenhouse Damage",NA,0.001,0.001
-"Plant Height (log)",0.765,0.585,0.814
+"Plant Height (log)",0.619,0.585,0.814
 "D1 Aphid Damage (log)",NA,0.317,0.317
 "D1 Aphid Count (log)",NA,0.548,0.548
-"D2 Aphid Damage (log)",0.517,0.612,0.644
+"D2 Aphid Damage (log)",0.402,0.612,0.644
 "NDRE",NA,0.543,0.543
 "NDRE (flowering covariate)",NA,0.212,0.212
 "NDVI",NA,0.411,0.411
