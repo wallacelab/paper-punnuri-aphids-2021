@@ -20,6 +20,12 @@ cat("Loading GLM results from", length(args$glm), "input files\n")
 glm = lapply(args$glm, function(infile){
     mydata = read.csv(infile)
     mydata$Trait = sub(mydata$Trait, pattern="&", repl=".", fixed=T)
+    
+    # Need to add "with_flowering" to drone traits with flowering covariate 
+    if(grepl(infile, pattern="with_flowering")){
+        mydata$Trait = paste(mydata$Trait, ".with_flowering", sep="")
+    }
+    
     return(mydata[,c("Trait", "Marker", "Chr", "Pos", "p", "perm_p")])
 })
 glm = do.call(rbind, glm)
