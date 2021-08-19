@@ -1,0 +1,10 @@
+1_CallGenotypes/1_2522_S17.sorted.bam	SAP_Grif578
+1_CallGenotypes/1_2811_S19.sorted.bam	SAP_PI675167
+1_CallGenotypes/1_2892_S21.sorted.bam	SAP_PI644294
+1_CallGenotypes/1_2920_S22.sorted.bam	SAP_PI607900
+1_CallGenotypes/1_2989_S23.sorted.bam	SAP_PI533934
+1_CallGenotypes/1_2994_S24.sorted.bam	SAP_PI257599
+1_CallGenotypes/1_2998_S25.sorted.bam	SAP_PI535794
+1_CallGenotypes/1_3003_S26.sorted.bam	SAP_PI535783
+1_CallGenotypes/1_3036_S18.sorted.bam	SAP_PI264453
+1_CallGenotypes/1_3050_S20.sorted.bam	SAP_PI550607
