@@ -3,6 +3,7 @@
 library(gridExtra)
 library(ggpubr)
 library(grid)
+library(cowplot)
 library(png)
 options(stringsAsFactors=F)
 setwd('~/Documents/Papers/PUNNURI_Sorghum Aphid Resistance/GWAS_github/publication_figures/')
@@ -39,6 +40,7 @@ get_plots = function(traits){
     for(i in 1:length(traits)){
         myplots[[i]] = plot_manhattan(traits[i], glm_files[i], farm_files[i], args)
     }
+    myplots = align_plots(plotlist=myplots, align="v")
     
     # Arrange into grid
     chrom_label=text_grob("Chromosome", size = 12, face = "bold") 

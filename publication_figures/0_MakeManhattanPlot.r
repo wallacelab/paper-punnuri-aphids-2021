@@ -129,10 +129,10 @@ plot_manhattan = function(trait_name, glm_file, farm_file, args){
                 geom_line(data=mypoints, mapping=aes(y=rmip.plot), color=cum_color, size=0.35) 
         }
         
-        # Add horizontal reference line
-        ref_line_y = rescale(args$rmip_cutoff, from=c(0, max(farm.all$rmip)), to=c(0, max(glm$log.p)))
-        myplot = myplot +
-            geom_hline(yintercept=ref_line_y, color=cum_color, size=0.35, linetype="dashed")
+        # Add horizontal reference line - DEPRECATED b/c felt more confusing; likely to be confused with GLM
+        #ref_line_y = rescale(args$rmip_cutoff, from=c(0, max(farm.all$rmip)), to=c(0, max(glm$log.p)))
+        #myplot = myplot +
+        #    geom_hline(yintercept=ref_line_y, color=cum_color, size=0.35, linetype="dashed")
     }
     
     # Significant FarmCPU hits by RMIP
