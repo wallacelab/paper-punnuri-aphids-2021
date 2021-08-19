@@ -8,7 +8,7 @@ args=list()
 args$farmcpu = list.files(path = "Results_FarmCPU", pattern="1e_", full.names=TRUE)
 args$glm =  list.files(path = "Results_GLM", pattern="glm_results", full.names=TRUE)
 args$rmip_cutoff = 0.05
-args$perm_cutoff = 0.05
+args$perm_cutoff = 0.01
 args$outprefix = "Table - Combined hits"
 farm_trait_pattern=".+1e_(.+)\\.p..\\.rmip.+.csv" # File pattern for extracting FarmCPU trait name
 
