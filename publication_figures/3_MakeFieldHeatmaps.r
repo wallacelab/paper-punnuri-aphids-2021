@@ -21,14 +21,14 @@ layout2020 = pivot_longer(map2020, cols=names(map2020)[-1], names_to="row", valu
 
 # Merge into one data frame
 ## 2019
-entries2019$key=paste(entries2019$PI.Number, entries2019$Rep, sep="_")
 phenos$key=paste(phenos$PI, phenos$Rep, sep="_")
-field2019 = inner_join(entries2019,layout2019, by=c("X2019.Field"="plot")) %>%
+field2019 = entries2019 %>%
+  mutate(key=paste(PI.Number, Rep, sep="_")) %>%
+  inner_join(layout2019, by=c("X2019.Field"="plot")) %>%
   inner_join(phenos, by="key")
 ## 2020
 field2020 = entries2020 %>%
-  left_join(entries2019[,c("X2019.Field", "PI.Number")], by=c("Source.no."="X2019.Field")) %>%
-  mutate(key=paste(PI.Number, Rep, sep="_")) %>%
+  mutate(key=paste(PI, Rep, sep="_")) %>%
   inner_join(layout2020, by=c("X2020.Field" = "plot")) %>%
   inner_join(phenos, by="key")
 
