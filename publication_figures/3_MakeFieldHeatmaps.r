@@ -34,7 +34,7 @@ field2020 = entries2020 %>%
 
 
 # Helper function to make each plot identically
-make_plot=function(myfield, pheno, name, legend_label, lowcolor, highcolor){
+make_plot=function(myfield, pheno, name, legend_label, lowcolor, highcolor, limits=NULL){
   mydata= myfield[,c("row", "range", pheno)] %>%
     mutate_all(as.numeric)
   names(mydata)[3] = "pheno"
@@ -44,7 +44,7 @@ make_plot=function(myfield, pheno, name, legend_label, lowcolor, highcolor){
     geom_raster() +
     ggtitle(name) +
     labs(x="Range", y="Row", fill=legend_label) +
-    scale_fill_gradient(low=lowcolor, high=highcolor) +
+    scale_fill_gradient(low=lowcolor, high=highcolor, limits=limits) +
     theme(axis.text=element_blank(), axis.ticks=element_blank(), 
           panel.background = element_blank(), title=element_text(face="bold"))
 }
@@ -57,12 +57,22 @@ red_high="#A50026"
 purp_low="#E7D4E8"
 purp_high="#762A83"
 
+# Get limits of count and damage scores
+count.limits=c(field2019$AV.AC_Aug14_2019, field2019$AV.AC_Aug_28_2019,
+               field2020$`AV.AC_Aug11-2020`, field2020$`AV.AC_Aug18-2020`) %>%
+  as.numeric() %>%
+  range(na.rm=T)
+damage.limits=c(field2019$`2019D1`, field2019$`2019D2`, 
+                field2020$`2020D1`, field2020$`2020D2`)%>%
+  as.numeric() %>%
+  range(na.rm=T)
+
 # Make plots - 2019
 flower.19=make_plot(field2019, "2019_Flowering", "Flowering Time (2019)", "DAP", blue_low, blue_high)
-count1.19=make_plot(field2019, "AV.AC_Aug14_2019", "AC1 (2019)", "# Aphids", purp_low, purp_high)
-count2.19=make_plot(field2019, "AV.AC_Aug_28_2019", "AC2 (2019)", "# Aphids", purp_low, purp_high)
-d1.19=make_plot(field2019, "2019D1", "D1 (2019)", "Score", red_low, red_high)
-d2.19=make_plot(field2019, "2019D2", "D2 (2019)", "Score", red_low, red_high)
+count1.19=make_plot(field2019, "AV.AC_Aug14_2019", "AC1 (2019)", "# Aphids", purp_low, purp_high, count.limits)
+count2.19=make_plot(field2019, "AV.AC_Aug_28_2019", "AC2 (2019)", "# Aphids", purp_low, purp_high, count.limits)
+d1.19=make_plot(field2019, "2019D1", "D1 (2019)", "Score", red_low, red_high, damage.limits)
+d2.19=make_plot(field2019, "2019D2", "D2 (2019)", "Score", red_low, red_high, damage.limits)
 
 # Export- 2019
 png("Figure - Field Heatmaps 2019.png", width=8, height=6, units="in", res=300)
@@ -72,10 +82,10 @@ dev.off()
 
 # Make plots - 2020
 flower.20=make_plot(field2020, "2020_Flowering", "Flowering Time (2020)", "DAP", blue_low, blue_high)
-count1.20=make_plot(field2020, "AV.AC_Aug11-2020", "AC1 (2020)", "# Aphids", purp_low, purp_high)
-count2.20=make_plot(field2020, "AV.AC_Aug18-2020", "AC2 (2020)", "# Aphids", purp_low, purp_high)
-d1.20=make_plot(field2020, "2020D1", "D1 (2020)", "Score", red_low, red_high)
-d2.20=make_plot(field2020, "2020D2", "D2 (2020)", "Score", red_low, red_high)
+count1.20=make_plot(field2020, "AV.AC_Aug11-2020", "AC1 (2020)", "# Aphids", purp_low, purp_high, count.limits)
+count2.20=make_plot(field2020, "AV.AC_Aug18-2020", "AC2 (2020)", "# Aphids", purp_low, purp_high, count.limits)
+d1.20=make_plot(field2020, "2020D1", "D1 (2020)", "Score", red_low, red_high, damage.limits)
+d2.20=make_plot(field2020, "2020D2", "D2 (2020)", "Score", red_low, red_high, damage.limits)
 
 # Export- 2020
 png("Figure - Field Heatmaps 2020.png", width=8, height=6, units="in", res=300)
