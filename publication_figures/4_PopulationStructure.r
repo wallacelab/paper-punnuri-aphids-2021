@@ -112,7 +112,7 @@ similar.window = lapply(targets, function(t){
              similarity=rollapply(similar[t,], width=winsize, FUN=mean, na.rm=TRUE))
 }) %>%
   bind_rows() %>%
-  mutate(pos=(start + stop)/2)
+  mutate(pos=(start + stop)/2, line=factor(line, levels=c(checks, best))) 
 
 # Plot
 simplot = ggplot(similar.window) +
