@@ -75,7 +75,7 @@ d1.19=make_plot(field2019, "2019D1", "D1 (14 Aug 2019)", "Score", red_low, red_h
 d2.19=make_plot(field2019, "2019D2", "D2 (28 Aug 2019)", "Score", red_low, red_high, damage.limits)
 
 # Export- 2019
-png("Figure - Field Heatmaps 2019.png", width=8, height=6, units="in", res=300)
+png("Figure - Field Heatmaps 2019.png", width=8, height=4, units="in", res=300)
   grid.arrange(count1.19, d1.19, count2.19, d2.19, ncol=2)
 dev.off()
 
@@ -87,6 +87,6 @@ d1.20=make_plot(field2020, "2020D1", "D1 (11 Aug 2020)", "Score", red_low, red_h
 d2.20=make_plot(field2020, "2020D2", "D2 (18 Aug 2020)", "Score", red_low, red_high, damage.limits)
 
 # Export- 2020
-png("Figure - Field Heatmaps 2020.png", width=8, height=6, units="in", res=300)
+png("Figure - Field Heatmaps 2020.png", width=8, height=4, units="in", res=300)
   grid.arrange(count1.20, d1.20, count2.20, d2.20, ncol=2)
 dev.off()
