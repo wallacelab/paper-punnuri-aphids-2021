@@ -95,6 +95,7 @@ genos.chrom = as.integer(sub(colnames(genos), pattern="^S(.+)_.+", repl="\\1"))
 genos.pos = as.integer(sub(colnames(genos), pattern="^S.+_(.+)", repl="\\1"))
 focus = genos[targets,genos.chrom==rmes1$chr & genos.pos >= rmes1$start - span &
                 genos.pos <= rmes1$end + span]
+focus = focus[,colSums(focus) != nrow(focus)] # Focus on segregating sites
 
 focus.pos = as.integer(sub(colnames(focus), pattern="^S.+_(.+)", repl="\\1"))
 donor="PI257599"
