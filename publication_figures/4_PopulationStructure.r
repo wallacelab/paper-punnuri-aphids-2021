@@ -35,20 +35,28 @@ is_best = rownames(pcoa) %in%  best
 
 # Update PCoA with checks vs controls
 pcoa = pcoa %>%
-  mutate(type=ifelse(is_check, "check", ifelse(is_best, "best", "other")),
-         name = ifelse(type == "other", "", taxa)) %>%
-  mutate(name = sub(name, pattern="\\..+", repl="")) #%>%
+  mutate(type=ifelse(is_check, "Resistant Check", ifelse(is_best, "Resistant Source", "Other")),
+         name = ifelse(type == "Other", "", taxa)) %>%
+  mutate(name = sub(name, pattern="\\..+", repl=""),
+         type=factor(type, levels=c("Resistant Source", "Resistant Check", "Other"))) #%>%
   #mutate(type = factor(type, levels=c("best", "check", "other")))# Remove name bits after first period
 names = pcoa %>%
-  filter(name != "")
+  filter(name != "") 
 
 # Plot PCoA
+colorkey=c("Resistant Source"="#F8766D", "Resistant Check"="#00BA38", "Other"="#619CFF")
 myplot = ggplot(pcoa %>% arrange(desc(type))) + # Sort descending so best and checks on top
   aes(x=PC1, y=PC2, fill=type, label=name) +
-  geom_point(size=3, shape=21, color="black", stroke=0.25) +
-  geom_label_repel(data=names, size=1.5, 
-                   fontface="bold", fill="white", label.padding=0.1)
-ggsave(myplot, file="Figure - Population PCoA.png", width=4, height=3, dpi=300)
+  geom_point(size=4, shape=21, color="black", stroke=0.25) +
+  geom_label_repel(data=names, mapping=aes(fill=type), size=2, 
+                   fontface="bold", label.padding=0.1, show.legend=FALSE) +
+  scale_color_manual(values=colorkey) + 
+  #scale_fill_manual(values=c("Resistant Source"="red", "Resistant Check"="black", "Other"="#619CFF")) + 
+  #scale_fill_manual(values=c("Resistant Source"="#f8c1bd", "Resistant Check"="#5eba7a")) + 
+  labs(fill="Accession Type") +
+  theme(legend.text = element_text(size=6), legend.key.size=unit(0.5, "cm"),
+        legend.position=c(0.2, 0.2), legend.title = element_text(size=8))
+ggsave(myplot, file="Figure - Population PCoA.png", width=4, height=3.5, dpi=300)
 
 
 # Calculate genetic similarity; as function in case want to do subsets elsewhere in genome
